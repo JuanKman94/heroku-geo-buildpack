@@ -32,7 +32,7 @@ function indent() {
 }
 
 function manifest_version() {
-  curl "http://${S3_BUCKET}.s3.amazonaws.com/${STACK}/manifest.${1}" -s -o - | head -n 1
+  curl "http://${S3_BUCKET}.s3.amazonaws.com/heroku-16/manifest.${1}" -s -o - | head -n 1
 }
 
 function download_package() {
@@ -41,7 +41,7 @@ function download_package() {
   location="$3"
 
   mkdir -p $location
-  package="https://${S3_BUCKET}.s3.amazonaws.com/${STACK}/$name-$version.tgz"
+  package="https://${S3_BUCKET}.s3.amazonaws.com/heroku-16/$name-$version.tgz"
   curl $package -s -o - | tar xzf - -C $location
 }
 
