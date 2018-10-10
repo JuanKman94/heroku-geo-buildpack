@@ -22,8 +22,4 @@ make install
 
 pushd $output
 tar -czf geos-$GEOS_VERSION.tgz *
-aws s3 cp --acl public-read geos-$GEOS_VERSION.tgz s3://$S3_BUCKET/$STACK/
-
 echo $GEOS_VERSION > manifest.geos
-aws s3 cp --acl public-read manifest.geos s3://$S3_BUCKET/$STACK/
-
