@@ -12,7 +12,7 @@ unset GIT_DIR
 
 # Configuration
 GITHUB_USER=${GITHUB_USER:-"CheesecakeLabs"}
-RELEASE_TAG=${RELEASE_TAG:-"v1.5"}
+LATEST_TAG=$(curl -Ls -w %{url_effective} -o /dev/null https://github.com/CheesecakeLabs/heroku-geo-buildpack/releases/latest | sed 's/.*\///g')
 
 # Parameters
 BUILD_DIR=$1
@@ -33,7 +33,7 @@ function indent() {
 }
 
 function manifest_version() {
-  curl -L "https://github.com/${GITHUB_USER}/heroku-geo-buildpack/releases/download/${RELEASE_TAG}/manifest.${1}" -s -o - | head -n 1
+  curl -L "https://github.com/${GITHUB_USER}/heroku-geo-buildpack/releases/download/${LATEST_TAG}/manifest.${1}" -s -o - | head -n 1
 }
 
 function download_package() {
@@ -42,7 +42,7 @@ function download_package() {
   location="$3"
 
   mkdir -p $location
-  package="https://github.com/${GITHUB_USER}/heroku-geo-buildpack/releases/download/${RELEASE_TAG}/$name-$version.tgz"
+  package="https://github.com/${GITHUB_USER}/heroku-geo-buildpack/releases/download/${LATEST_TAG}/$name-$version.tgz"
   curl -L $package -s -o - | tar xzf - -C $location
 }
 
