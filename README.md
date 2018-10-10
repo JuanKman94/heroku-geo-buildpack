@@ -35,7 +35,7 @@ image using Docker & pushed to a public S3 bucket.
 * Set the AWS keys to ones with permission to push to the selected S3 bucket
 * If updating the stack, also update it in `support/Dockerfile`
 * *Make sure you've deleted any cached heroku docker images*
-* Build with `cd support && docker-compose run geo-build`
+* Build with `cd support && docker-compose run geo-builder`
 * Wait 20 minutes, and check the contents of the relevant stack folder on S3
 
 Testing
