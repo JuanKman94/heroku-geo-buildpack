@@ -1,10 +1,12 @@
-Heroku buildpack: geo
-=====================
+Heroku buildpack: Geospatial Libraries
+======================================
 
 This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) that
 vendors main geo/gis libraries like geos, proj and gdal.
 
-You will use this buildpack with other major buildpack such as Ruby buildpack.
+We forked this from [cyberdelia/heroku-geo-buildpack](https://github.com/cyberdelia/heroku-geo-buildpack) since it's associated S3 bucket didn't have support for the `heroku-18` stack yet, and we'd like to use github's [releases](https://github.com/CheesecakeLabs/heroku-geo-buildpack/releases) to make the libs available instead of an AWS S3 bucket.
+
+**:warning: Make sure your heroku stack matches the releases' binaries (`heroku-18`).**
 
 Usage
 -----
@@ -12,7 +14,7 @@ Usage
 Example usage:
 
 ```
-$ heroku buildpacks:set https://github.com/cyberdelia/heroku-geo-buildpack.git
+$ heroku buildpacks:set https://github.com/CheesecakeLabs/heroku-geo-buildpack.git
 $ heroku buildpacks:add heroku/ruby
 ```
 
@@ -22,21 +24,20 @@ the language buildpacks.
 ```
 $ heroku buildpacks
 === sushi Buildpack URLs
-1. https://github.com/cyberdelia/heroku-geo-buildpack.git
+1. https://github.com/CheesecakeLabs/heroku-geo-buildpack.git
 2. heroku/ruby
 ```
 
 Updating
 --------
  Binaries for `geos`, `gdal` and `proj` are build on the appropriate heroku stack
-image using Docker & pushed to a public S3 bucket.
+image using Docker & attached to a [release](https://github.com/CheesecakeLabs/heroku-geo-buildpack/releases).
  To update or rebuild these:
- * Set the versions and stack environment in `support/docker-compose.yml`
-* Set the AWS keys to ones with permission to push to the selected S3 bucket
+* Set the versions and stack environment in `support/docker-compose.yml`
 * If updating the stack, also update it in `support/Dockerfile`
 * *Make sure you've deleted any cached heroku docker images*
 * Build with `cd support && docker-compose run geo-builder`
-* Wait 20 minutes, and check the contents of the relevant stack folder on S3
+* Wait 20 minutes, and check the contents of your `/tmp/` folder for any `.tgz` files. Those files must be uploaded with a `manifest.<lib>` indicating the correct lib version to your [release](https://github.com/CheesecakeLabs/heroku-geo-buildpack/releases).
 
 Testing
 -------
