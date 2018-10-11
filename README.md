@@ -15,7 +15,7 @@ Example usage:
 
 ```
 $ heroku buildpacks:set https://github.com/CheesecakeLabs/heroku-geo-buildpack.git
-$ heroku buildpacks:add heroku/ruby
+$ heroku buildpacks:add heroku/python
 ```
 
 Run `heroku buildpacks` to make sure that `heroku-geo-buildpack` is added before
@@ -25,7 +25,7 @@ the language buildpacks.
 $ heroku buildpacks
 === sushi Buildpack URLs
 1. https://github.com/CheesecakeLabs/heroku-geo-buildpack.git
-2. heroku/ruby
+2. heroku/python
 ```
 
 Updating
@@ -42,20 +42,10 @@ image using Docker & attached to a [release](https://github.com/CheesecakeLabs/h
 Testing
 -------
 
-For Geo Django:
+On Django Shell:
 
 ```python
 >>> from django.contrib.gis import gdal
->>> gdal.HAS_GDAL
-True
-```
-
-For rgeo:
-
-```ruby
->>> require 'rgeo'
->>> RGeo::CoordSys::Proj4.supported?
-=> true
->>> RGeo::Geos.supported?
-=> true
+>>> gdal.GDAL_VERSION
+(2, 2, 0)
 ```
