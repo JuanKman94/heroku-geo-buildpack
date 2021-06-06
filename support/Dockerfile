@@ -1,4 +1,4 @@
-FROM heroku/heroku:18-build
+FROM heroku/heroku:20-build
 
 ADD package_gdal package_gdal
 ADD package_geos package_geos

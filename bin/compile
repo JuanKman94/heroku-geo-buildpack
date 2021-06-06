@@ -11,8 +11,8 @@ set -x
 unset GIT_DIR
 
 # Configuration
-GITHUB_USER=${GITHUB_USER:-"CheesecakeLabs"}
-LATEST_TAG=$(curl -Ls -w %{url_effective} -o /dev/null https://github.com/CheesecakeLabs/heroku-geo-buildpack/releases/latest | sed 's/.*\///g')
+GITHUB_USER=${GITHUB_USER:-"JuanKman94"}
+LATEST_TAG=$(curl -Ls -w %{url_effective} -o /dev/null https://github.com/${GITHUB_USER}/heroku-geo-buildpack/releases/latest | sed 's/.*\///g')
 
 # Parameters
 BUILD_DIR=$1
